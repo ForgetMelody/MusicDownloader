@@ -35,7 +35,8 @@ class MyWindow(QMainWindow, Ui_Form):
 #         print("Success")
 #     except:
 #         print('Failed')#要会员才能“播放”的歌是不能下载的
-#获取根据str搜索ID和名字
+
+#根据str搜索ID和名字
 def getSong(name):
     searcher = search()
     #print('[Info]Got ID:'+id +'\n[Info]Got Name:'+ name)
