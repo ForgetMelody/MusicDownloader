@@ -6,7 +6,7 @@
 * 代码写的很烂
 
 ## 截图
-  !(ScreenShoot)[]
+  !(ScreenShoot)[https://github.com/ForgetMelody/MusicDownloader/blob/master/ScreenShoot.png?raw=true]
 ## 日志
 
 * 8.27 修复部分Bug 支持选择下载路径 GUI添加日志查看
