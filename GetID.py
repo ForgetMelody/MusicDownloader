@@ -75,7 +75,7 @@ class search():
         resp = self.session.post(url, data=data)
         result = resp.json()
         if result['result']['songCount']<= 0:
-            return '0'
+            return None,None
         else:
             songs = result['result']['songs']
             for song in songs:

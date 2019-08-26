@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>265</width>
-    <height>120</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>101</width>
+     <width>111</width>
      <height>51</height>
     </rect>
    </property>
@@ -27,32 +27,6 @@
    </property>
    <property name="checkable">
     <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="ID_Label">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>70</y>
-     <width>141</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>歌曲ID:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Name_Label">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>90</y>
-     <width>131</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>歌曲名：</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -78,6 +52,38 @@
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="ChangeDownloadDir_Button">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>60</y>
+     <width>111</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择下载路径</string>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="Console">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>121</y>
+     <width>251</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -94,6 +100,22 @@
     <hint type="destinationlabel">
      <x>26</x>
      <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ChangeDownloadDir_Button</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangeDownloadDir_Button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
