@@ -1,9 +1,10 @@
 # MusicDownloader
 
 ## 简述
-* 带有图形界面的网易云音乐下载器
-* 基于Pythonn的爬虫
-* 代码写的很烂
+* 基于Request爬虫实现的网易云音乐下载器
+* PyQT5编写的GUI
+* 支持多线程同时下载多首歌曲
+* 代码写的有点烂
 
 ## 截图
 ![ShootCut](https://github.com/ForgetMelody/MusicDownloader/blob/master/ScreenShoot.png?raw=true)
