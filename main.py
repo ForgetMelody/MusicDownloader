@@ -14,6 +14,9 @@ class MyWindow(QMainWindow, Ui_Form):
         self.setFixedSize(265, 316)
         self.setupUi(self)
         self.directory = ''
+        self.headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+                }#伪装 防反爬虫
 
     #重写父类中的按钮点击事件
     def Download_Button_click(self):
@@ -37,9 +40,15 @@ class MyWindow(QMainWindow, Ui_Form):
             self.directory = self.ChangeDownloadDir_Button_click()
         time.sleep(0.1)
         self.outPutMessageToConsole('[Info]开始下载:' + name)
-        t = threading.Thread(target=self.download,args=(id,name,self.directory))
-        t.setDaemon(False)
-        t.start()
+        downloadSong = threading.Thread(target=self.downloadSong, args=(id, name, self.directory))
+        downloadSong.setDaemon(False)
+        downloadSong.start()
+        if self.checkBox.isChecked():#勾选了下载歌词
+            print('开始下载歌词：' + name)
+            downloadLyric = threading.Thread(target=self.downloadLyric, args=(id, name, self.directory))
+            downloadLyric.setDaemon(False)
+            downloadLyric.start()
+
 
     def ChangeDownloadDir_Button_click(self):
         self.directory = QtWidgets.QFileDialog.getExistingDirectory(self, "getExistingDirectory", "./")
@@ -48,27 +57,43 @@ class MyWindow(QMainWindow, Ui_Form):
         return self.directory
 
     # 下载music
-    def download(self,music_id, music_name, directory):
+    def downloadSong(self, music_id, music_name, directory):
 
         try:
             music_url = 'http://music.163.com/song/media/outer/url?id=%s.mp3' % music_id
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
-                }#伪装 防反爬虫
-            print('开始下载 ' + music_name + ' 到 ' + directory + ' 目录')
-            r = requests.get(url=music_url,headers=headers)
-            pprint(r)#答应Response [200]即成功
+
+            print('开始下载' + music_name + ' 到 ' + directory + ' 目录')
+            r = requests.get(url=music_url,headers=self.headers)
+            pprint(r)#Response [200]即成功
             path = directory + '\%s.mp3' % music_name  # 下载文件存放路径
             with open(path, 'wb') as f:
                 f.write(r.content)
             time.sleep(1)
-            print("成功下载" + music_name)
-            self.outPutMessageToConsole('[Info]下载完成:' + music_name)
+            print("歌曲下载完成:" + music_name)
+            self.outPutMessageToConsole('[Info]歌曲下载完成:' + music_name)
             return 0
         except Exception as e:
             print(e)  # 要会员才能“播放”的歌是不能下载的
             self.outPutMessageToConsole("[Error]请使用控制台查看错误")
             return 1
+
+    #下载歌词
+    def downloadLyric(self,music_id,music_name,directory):
+        try:
+            lyric_url = 'http://music.163.com/api/song/lyric?id=%s&lv=1&kv=1&tv=-1' % music_id
+            self.outPutMessageToConsole('[Info]开始下载歌词:' + music_name)
+            r = requests.get(url=lyric_url,headers=self.headers)
+            json_obj = r.text
+            j = json.loads(json_obj)
+            lyric = j['lrc']['lyric']
+            path = directory + '\%s.txt' % music_name #下载文件存放路径
+            with open(path,'w') as f:
+                f.write(lyric)
+            time.sleep(1)
+            print('成功下载歌词:' + music_name)
+            self.outPutMessageToConsole('[Info]歌词下载完成:' + music_name)
+        except Exception as e:
+            print(e)
 
 
     #根据str搜索ID和名字

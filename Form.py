@@ -11,7 +11,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Form(object):
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(265, 316)
@@ -23,7 +22,7 @@ class Ui_Form(object):
         self.label.setGeometry(QtCore.QRect(10, 10, 151, 16))
         self.label.setObjectName("label")
         self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(10, 30, 241, 21))
+        self.textEdit.setGeometry(QtCore.QRect(10, 30, 161, 21))
         self.textEdit.setObjectName("textEdit")
         self.ChangeDownloadDir_Button = QtWidgets.QPushButton(Form)
         self.ChangeDownloadDir_Button.setGeometry(QtCore.QRect(140, 60, 111, 51))
@@ -34,6 +33,9 @@ class Ui_Form(object):
         self.Console.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Console.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.Console.setObjectName("Console")
+        self.checkBox = QtWidgets.QCheckBox(Form)
+        self.checkBox.setGeometry(QtCore.QRect(180, 30, 71, 21))
+        self.checkBox.setObjectName("checkBox")
 
         self.retranslateUi(Form)
         self.Download_Button.clicked.connect(self.Download_Button_click)
@@ -42,13 +44,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Downloader"))
+        Form.setWindowTitle(_translate("Form", "MusicDownloader"))
         self.Download_Button.setText(_translate("Form", "下载"))
         self.label.setText(_translate("Form", "输入下载歌曲ID或搜索歌曲"))
         self.ChangeDownloadDir_Button.setText(_translate("Form", "选择下载路径"))
+        self.checkBox.setText(_translate("Form", "下载歌词"))
 
-    def Download_Button_click(self):
+    def ChangeDownloadDir_button_click(self):
         pass
 
-    def ChangeDownloadDir_Button_click(self):
+    def Download_Button_click(self):
         pass
